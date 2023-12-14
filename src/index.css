@@ -96,7 +96,7 @@ body {
 
 .slider {
   margin: 0 auto;
-  padding: 45px 60px;
+  padding: 45px 60px 37px 60px;
 }
 .slider__container {
   max-width: 960px;
@@ -149,4 +149,104 @@ body {
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+}
+
+.cards {
+  padding: 0 60px 37px 60px;
+}
+
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px
+}
+
+.cards__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 37px;
+}
+.cards__top-title {
+  padding: 0;
+  margin: 0;
+  color: #000;
+font-size: 32px;
+font-style: normal; 
+font-weight: 700;
+line-height: normal;
+}
+.cards__top-search {
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  padding: 0 15px;
+  position: relative;
+}
+
+.cards__input {
+  border: 0;
+    padding: 13px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.cards__input::placeholder {
+  color: #C4C4C4;
+font-weight: 400;
+}
+
+.cards__input:focus {
+  outline: none !important;
+}
+
+.card {
+  box-sizing: border-box;
+  width: 210px;
+height: 260px;
+border-radius: 40px;
+border: 1px solid #F3F3F3;
+background: #FFF;
+padding: 29px 29px 34px 30px;
+position: relative;
+}
+
+.card__like {
+  background: none;
+  border: none;
+  padding: 0;
+  position: absolute;
+}
+
+.card__name {
+  margin: 0 0 14px 0;
+  color: #000;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.card__bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card__subtitle {
+  margin: 0;
+  color: #BDBDBD;
+font-size: 11px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+text-transform: uppercase;
+}
+.card__price {
+  color: #000;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.card__plus-btn {
+  background: none;
+  border: none;
+  padding: 0;
 }
