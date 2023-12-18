@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 420px;
+  height: 100%;
+  right: 0;
+  background: #ffffff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.drawer__title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.drawer__close {
+  cursor: pointer;
+}
+
+.items {
+  flex: 1;
+  overflow: auto;
+  margin-bottom: 40px;
+}
+
+.cart__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.cart__item-img {
+  height: 70px;
+  width: 70px;
+  background-size: contain;
+  background-position: 0 -3px;
+  background-repeat: no-repeat;
+  margin-right: 20px;
+  background-image: url(../../images/sneakers/1.png);
+}
+
+.cart__item-text {
+  margin-right: 20px;
+  flex: 1;
+}
+
+.cart__item-name {
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.cart__price {
+  font-size: 14px;
+}
+
+.remove-button {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+}
+.remove-button:hover {
+  opacity: 1;
+}
+
+.cart__total-list {
+  display: block;
+  margin-bottom: 40px !important;
+}
+
+.cart__total-item {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.cart__total-line {
+  flex: 1;
+  height: 1px;
+  border-bottom: 1px dashed #dfdfdf;
+  position: relative;
+  top: -4px;
+  margin: 0 7px;
+}

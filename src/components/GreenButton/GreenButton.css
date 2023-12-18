@@ -1,0 +1,29 @@
+.green-button {
+  position: relative;
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.green-button:hover {
+  background: #abe465;
+}
+
+.green-button:active {
+  background: #93c852;
+}
+
+.green-button__image {
+  transform: translateX(5px);
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  transition: transform 0.15s ease-in-out;
+}
