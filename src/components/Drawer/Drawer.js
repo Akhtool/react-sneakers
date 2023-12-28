@@ -2,9 +2,12 @@ import "./Drawer.css";
 import closeBtn from "../../images/close.svg";
 import GreenButton from "../GreenButton/GreenButton";
 
-function Drawer() {
+function Drawer({ isDrawerOpen, handleDrawerCloseClick }) {
   return (
-    <div style={{ display: "none" }} className="overlay">
+    <div
+      style={{ display: `${isDrawerOpen ? "block" : "none"}` }}
+      className="overlay"
+    >
       <div className="drawer">
         <h2 className="drawer__title">
           Корзина{" "}
@@ -12,6 +15,7 @@ function Drawer() {
             className="drawer__close remove-button"
             src={closeBtn}
             alt="Remove"
+            onClick={() => handleDrawerCloseClick()}
           />
         </h2>
 

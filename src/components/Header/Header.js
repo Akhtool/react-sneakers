@@ -4,7 +4,7 @@ import headerCart from "../../images/header-cart.svg";
 import headerFavorite from "../../images/header-favorite.svg";
 import headerProfile from "../../images/header-profile.svg";
 
-function Header() {
+function Header({ handleDrawerOpenClick }) {
   return (
     <header className="header">
       <div className="header__left">
@@ -16,7 +16,10 @@ function Header() {
       </div>
       <div className="header__right">
         <ul className="header__nav-container">
-          <li className="header__cart header__nav-item">
+          <li
+            className="header__cart header__nav-item"
+            onClick={() => handleDrawerOpenClick()}
+          >
             <img
               className="header__nav-item-img"
               alt="cart-log"
