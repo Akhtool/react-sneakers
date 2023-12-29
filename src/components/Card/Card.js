@@ -1,8 +1,24 @@
 import "./Card.css";
-import cardImage from "../../images/card-img.jpg";
+import cardImage from "../../images/sneakers/sneakers-9.jpg";
+import ContentLoader from "react-content-loader";
 
-function Card() {
-  return (
+function Card({ isLoading, imageUrl, title, price }) {
+  return isLoading ? (
+    <ContentLoader
+      speed={2}
+      width={155}
+      height={250}
+      viewBox="0 0 155 265"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+    >
+      <rect x="1" y="0" rx="10" ry="10" width="155" height="155" />
+      <rect x="0" y="167" rx="5" ry="5" width="155" height="15" />
+      <rect x="0" y="187" rx="5" ry="5" width="100" height="15" />
+      <rect x="1" y="234" rx="5" ry="5" width="80" height="25" />
+      <rect x="124" y="230" rx="10" ry="10" width="32" height="32" />
+    </ContentLoader>
+  ) : (
     <div className="card">
       <button className="card__like">
         <svg
@@ -20,11 +36,11 @@ function Card() {
         </svg>
       </button>
       <img width={133} height={112} src={cardImage} alt="Card image" />
-      <h3 className="card__name">Мужские Кроссовки Nike Blazer Mid Suede</h3>
+      <h3 className="card__name">{title}</h3>
       <div className="card__bottom">
         <div>
           <p className="card__subtitle">Цена:</p>
-          <span className="card__price">12 999 руб.</span>
+          <span className="card__price">{price} руб.</span>
         </div>
         <button className="plus-button">
           <svg

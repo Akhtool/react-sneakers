@@ -3,7 +3,7 @@ import Card from "../Card/Card";
 
 import searchLogo from "../../images/search.svg";
 
-function Cards() {
+function Cards({ isLoading, cards }) {
   return (
     <section className="cards">
       <div className="cards__top">
@@ -20,7 +20,17 @@ function Cards() {
         </div>
       </div>
       <div className="cards__list">
-        <Card />
+        {cards.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              isLoading={isLoading}
+              imageUrl={item.imageUrl}
+              title={item.title}
+              price={item.price}
+            />
+          );
+        })}
       </div>
     </section>
   );
