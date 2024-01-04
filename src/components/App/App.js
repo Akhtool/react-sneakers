@@ -11,7 +11,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const getCardData = () => {
-    fetch("https://604781a0efa572c1.mokky.dev/items")
+    fetch("https://6596652f6bb4ec36ca02849f.mockapi.io/sneakers")
       .then((res) => res.json())
       .then((res) => {
         setCards(res);
