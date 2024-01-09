@@ -3,21 +3,20 @@ import "./Card.css";
 import ContentLoader from "react-content-loader";
 import cardAddImage from "../../images/card-add.png";
 import cardAddedImage from "../../images/card-added.png";
-import cardLikeImage from "../../images/card-like.png"
-import cardLikedImage from "../../images/card-liked.jpg"
+import cardLikeImage from "../../images/card-like.png";
+import cardLikedImage from "../../images/card-liked.jpg";
 
-
-
-function Card({ isLoading, imageUrl, title, price }) {
+function Card({ isLoading, id, imageUrl, title, price, handleAddToCart }) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavourite, setIsFovourite] = useState(false);
 
   const handleAddCardClick = () => {
     setIsAdded(!isAdded);
-  }
+    handleAddToCart({ id, imageUrl, title, price });
+  };
   const handleToFavouriteClick = () => {
     setIsFovourite(!isFavourite);
-  }
+  };
   return isLoading ? (
     <ContentLoader
       speed={2}
@@ -35,8 +34,15 @@ function Card({ isLoading, imageUrl, title, price }) {
     </ContentLoader>
   ) : (
     <div className="card">
-      <button onClick={handleToFavouriteClick} style={{ backgroundImage: `url(${isFavourite ? cardLikedImage : cardLikeImage })` }} className="card__like">
-      </button>
+      <button
+        onClick={handleToFavouriteClick}
+        style={{
+          backgroundImage: `url(${
+            isFavourite ? cardLikedImage : cardLikeImage
+          })`,
+        }}
+        className="card__like"
+      ></button>
       <img width={133} height={112} src={imageUrl} alt="Card image" />
       <h3 className="card__name">{title}</h3>
       <div className="card__bottom">
@@ -44,7 +50,13 @@ function Card({ isLoading, imageUrl, title, price }) {
           <p className="card__subtitle">Цена:</p>
           <span className="card__price">{price} руб.</span>
         </div>
-        <button onClick={handleAddCardClick} style={{ backgroundImage: `url(${isAdded ? cardAddedImage: cardAddImage })` }} className="card__add"></button>
+        <button
+          onClick={handleAddCardClick}
+          style={{
+            backgroundImage: `url(${isAdded ? cardAddedImage : cardAddImage})`,
+          }}
+          className="card__add"
+        ></button>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ function App() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cartItems, setCartItems] = useState([]);
 
   const getCardData = () => {
     fetch("https://6596652f6bb4ec36ca02849f.mockapi.io/sneakers")
@@ -27,6 +28,11 @@ function App() {
     getCardData();
   }, []);
 
+  const handleAddToCart = (sneaker) => {
+    console.log(sneaker);
+    setCartItems([...cartItems, sneaker]);
+  };
+
   const handleDrawerOpenClick = () => {
     setDrawerOpen(true);
   };
@@ -40,11 +46,16 @@ function App() {
       <Drawer
         isDrawerOpen={isDrawerOpen}
         handleDrawerCloseClick={handleDrawerCloseClick}
+        cartItems={cartItems}
       />
       <Header handleDrawerOpenClick={handleDrawerOpenClick} />
       <main>
         <Slider />
-        <Cards isLoading={isLoading} cards={cards} />
+        <Cards
+          isLoading={isLoading}
+          cards={cards}
+          handleAddToCart={handleAddToCart}
+        />
       </main>
       <footer className="footer">
         <h3 className="footer__title">React Sneakers by Akhtool</h3>

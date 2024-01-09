@@ -2,7 +2,7 @@ import "./Drawer.css";
 import closeBtn from "../../images/close.svg";
 import GreenButton from "../GreenButton/GreenButton";
 
-function Drawer({ isDrawerOpen, handleDrawerCloseClick }) {
+function Drawer({ isDrawerOpen, handleDrawerCloseClick, cartItems }) {
   return (
     <div
       style={{ display: `${isDrawerOpen ? "block" : "none"}` }}
@@ -20,91 +20,55 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick }) {
         </h2>
 
         <div className="items">
-          <div className="cart__item">
-            <div className="cart__item-img"></div>
-
-            <div className="cart__item-text">
-              <p className="cart__item-name">
-                Мужские Кроссовки Nike Air Max 270
+          {cartItems.length < 1 ? (
+            <div className="items__empty">
+              <div className="items__empty-img"></div>
+              <h3 className="items__empty-title">Корзина пустая</h3>
+              <p className="items__empty-subtitle">
+                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
               </p>
-              <b className="cart__price">12 999 руб.</b>
+              <GreenButton title={"Вернуться назад"} />
             </div>
-            <img className="remove-button" src={closeBtn} alt="Remove" />
-          </div>
-          <div className="cart__item">
-            <div className="cart__item-img"></div>
+          ) : (
+            cartItems.map((item) => {
+              return (
+                <div key={item.id} className="cart__item">
+                  <div className="cart__item-img">
+                    <img
+                      width={80}
+                      height={70}
+                      src={item.imageUrl}
+                      alt="Картинка кросовок"
+                    />
+                  </div>
 
-            <div className="cart__item-text">
-              <p className="cart__item-name">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <b className="cart__price">12 999 руб.</b>
-            </div>
-            <img className="remove-button" src={closeBtn} alt="Remove" />
-          </div>
-          <div className="cart__item">
-            <div className="cart__item-img"></div>
-
-            <div className="cart__item-text">
-              <p className="cart__item-name">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <b className="cart__price">12 999 руб.</b>
-            </div>
-            <img className="remove-button" src={closeBtn} alt="Remove" />
-          </div>
-          <div className="cart__item">
-            <div className="cart__item-img"></div>
-
-            <div className="cart__item-text">
-              <p className="cart__item-name">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <b className="cart__price">12 999 руб.</b>
-            </div>
-            <img className="remove-button" src={closeBtn} alt="Remove" />
-          </div>
-
-          <div className="cart__item">
-            <div className="cart__item-img"></div>
-
-            <div className="cart__item-text">
-              <p className="cart__item-name">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <b>12 999 руб.</b>
-            </div>
-            <img className="remove-button" src={closeBtn} alt="Remove" />
-          </div>
-
-          <div className="cart__item">
-            <div className="cart__item-img"></div>
-
-            <div className="cart__item-text">
-              <p className="cart__item-name">
-                Мужские Кроссовки Nike Air Max 270
-              </p>
-              <b>12 999 руб.</b>
-            </div>
-            <img className="remove-button" src={closeBtn} alt="Remove" />
-          </div>
+                  <div className="cart__item-text">
+                    <p className="cart__item-name">{item.title}</p>
+                    <b className="cart__price">{item.price} руб.</b>
+                  </div>
+                  <img className="remove-button" src={closeBtn} alt="Remove" />
+                </div>
+              );
+            })
+          )}
         </div>
-
-        <div className="cart__total">
-          <ul className="cart__total-list">
-            <li className="cart__total-item">
-              <span>Итого:</span>
-              <div className="cart__total-line"></div>
-              <b>21 498 руб. </b>
-            </li>
-            <li className="cart__total-item">
-              <span>Налог 5%:</span>
-              <div className="cart__total-line"></div>
-              <b>1074 руб. </b>
-            </li>
-          </ul>
-          <GreenButton />
-        </div>
+        {cartItems.length > 1 ? (
+          <div className="cart__total">
+            <ul className="cart__total-list">
+              <li className="cart__total-item">
+                <span>Итого:</span>
+                <div className="cart__total-line"></div>
+                <b>21 498 руб. </b>
+              </li>
+              <li className="cart__total-item">
+                <span>Налог 5%:</span>
+                <div className="cart__total-line"></div>
+                <b>1074 руб. </b>
+              </li>
+            </ul>
+            <GreenButton title={"Оформить заказ"} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

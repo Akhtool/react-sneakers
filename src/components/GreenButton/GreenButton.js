@@ -1,10 +1,10 @@
 import "./GreenButton.css";
 import arrow from "../../images/arrow.svg";
 
-function GreenButton() {
+function GreenButton({ title }) {
   return (
     <button className="green-button">
-      Оформить заказ{" "}
+      {title}
       <img className="green-button__image" src={arrow} alt="Arrow" />
     </button>
   );

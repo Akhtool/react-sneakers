@@ -3,7 +3,7 @@ import Card from "../Card/Card";
 
 import searchLogo from "../../images/search.svg";
 
-function Cards({ isLoading, cards }) {
+function Cards({ isLoading, cards, handleAddToCart }) {
   return (
     <section className="cards">
       <div className="cards__top">
@@ -25,9 +25,11 @@ function Cards({ isLoading, cards }) {
             <Card
               key={item.id}
               isLoading={isLoading}
+              id={item.id}
               imageUrl={item.imageUrl}
               title={item.title}
               price={item.price}
+              handleAddToCart={handleAddToCart}
             />
           );
         })}
