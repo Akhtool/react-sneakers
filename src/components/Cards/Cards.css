@@ -36,6 +36,20 @@
   left: 19px;
 }
 
+.cards__top-search-btn {
+  position: absolute;
+  cursor: pointer;
+  width: 25px;
+  top: 9px;
+  right: 19px;
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.cards__top-search-btn:hover {
+  opacity: 1;
+}
+
 .cards__input {
   box-sizing: border-box;
   border: 0;
