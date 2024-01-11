@@ -1,22 +1,22 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Card.css";
 import ContentLoader from "react-content-loader";
 import cardAddImage from "../../images/card-add.png";
 import cardAddedImage from "../../images/card-added.png";
 import cardLikeImage from "../../images/card-like.png";
 import cardLikedImage from "../../images/card-liked.jpg";
+import { Context } from "../../context/Context";
 
-function Card({
-  isLoading,
-  id,
-  imageUrl,
-  title,
-  price,
-  cartItems,
-  setCartItems,
-}) {
-  const [isAdded, setIsAdded] = useState(false);
+function Card({ isLoading, id, imageUrl, title, price }) {
   const [isFavourite, setIsFovourite] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
+  const { cartItems, setCartItems } = useContext(Context);
+
+  useEffect(() => {
+    // Проверяем, есть ли текущая карточка в корзине
+    const isInCart = cartItems.some((item) => item.id === id);
+    setIsAdded(isInCart);
+  }, [cartItems, id]);
 
   const handleAddToCart = (sneaker) => {
     const existingCartItem = cartItems.find((item) => item.id === sneaker.id);

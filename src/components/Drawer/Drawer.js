@@ -1,8 +1,15 @@
 import "./Drawer.css";
 import closeBtn from "../../images/close.svg";
 import GreenButton from "../GreenButton/GreenButton";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 
-function Drawer({ isDrawerOpen, handleDrawerCloseClick, items }) {
+function Drawer({ isDrawerOpen, handleDrawerCloseClick }) {
+  const { cartItems, setCartItems } = useContext(Context);
+
+  const handleDeleteCardClick = (id) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
   return (
     <div
       style={{ display: `${isDrawerOpen ? "block" : "none"}` }}
@@ -20,7 +27,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, items }) {
         </h2>
 
         <div className="items">
-          {items.length < 1 ? (
+          {cartItems.length < 1 ? (
             <div className="items__empty">
               <div className="items__empty-img"></div>
               <h3 className="items__empty-title">Корзина пустая</h3>
@@ -30,7 +37,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, items }) {
               <GreenButton title={"Вернуться назад"} />
             </div>
           ) : (
-            items.map((item) => {
+            cartItems.map((item) => {
               return (
                 <div key={item.id} className="cart__item">
                   <div className="cart__item-img">
@@ -46,13 +53,18 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, items }) {
                     <p className="cart__item-name">{item.title}</p>
                     <b className="cart__price">{item.price} руб.</b>
                   </div>
-                  <img className="remove-button" src={closeBtn} alt="Remove" />
+                  <img
+                    className="remove-button"
+                    src={closeBtn}
+                    alt="Remove"
+                    onClick={() => handleDeleteCardClick(item.id)}
+                  />
                 </div>
               );
             })
           )}
         </div>
-        {items.length > 0 ? (
+        {cartItems.length > 0 ? (
           <div className="cart__total">
             <ul className="cart__total-list">
               <li className="cart__total-item">
