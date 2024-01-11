@@ -25,8 +25,8 @@
   cursor: pointer;
   opacity: 0.7;
   background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  background-position: center;
+  background-size: cover;
 }
 
 .card__like:hover {
@@ -63,19 +63,19 @@
   line-height: normal;
 }
 
-.card__add {
+.card__add-button {
   background: none;
-     border: none;
-     padding: 0;
+  border: none;
+  padding: 0;
   width: 32px;
-height: 32px;
+  height: 32px;
   opacity: 0.7;
   background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
 }
 
-.card__add:hover {
+.card__add-button:hover {
   opacity: 1;
 }

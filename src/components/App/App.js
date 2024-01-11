@@ -28,11 +28,6 @@ function App() {
     getCardData();
   }, []);
 
-  const handleAddToCart = (sneaker) => {
-    console.log(sneaker);
-    setCartItems([...cartItems, sneaker]);
-  };
-
   const handleDrawerOpenClick = () => {
     setDrawerOpen(true);
   };
@@ -46,7 +41,7 @@ function App() {
       <Drawer
         isDrawerOpen={isDrawerOpen}
         handleDrawerCloseClick={handleDrawerCloseClick}
-        cartItems={cartItems}
+        items={cartItems}
       />
       <Header handleDrawerOpenClick={handleDrawerOpenClick} />
       <main>
@@ -54,7 +49,8 @@ function App() {
         <Cards
           isLoading={isLoading}
           cards={cards}
-          handleAddToCart={handleAddToCart}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
         />
       </main>
       <footer className="footer">

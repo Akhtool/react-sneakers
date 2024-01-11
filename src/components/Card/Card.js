@@ -6,17 +6,39 @@ import cardAddedImage from "../../images/card-added.png";
 import cardLikeImage from "../../images/card-like.png";
 import cardLikedImage from "../../images/card-liked.jpg";
 
-function Card({ isLoading, id, imageUrl, title, price, handleAddToCart }) {
+function Card({
+  isLoading,
+  id,
+  imageUrl,
+  title,
+  price,
+  cartItems,
+  setCartItems,
+}) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavourite, setIsFovourite] = useState(false);
+
+  const handleAddToCart = (sneaker) => {
+    const existingCartItem = cartItems.find((item) => item.id === sneaker.id);
+    if (!existingCartItem) {
+      setCartItems([...cartItems, sneaker]);
+    }
+  };
 
   const handleAddCardClick = () => {
     setIsAdded(!isAdded);
     handleAddToCart({ id, imageUrl, title, price });
   };
+
+  const handleDeleteCardClick = (id) => {
+    setIsAdded(!isAdded);
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
+
   const handleToFavouriteClick = () => {
     setIsFovourite(!isFavourite);
   };
+
   return isLoading ? (
     <ContentLoader
       speed={2}
@@ -51,11 +73,13 @@ function Card({ isLoading, id, imageUrl, title, price, handleAddToCart }) {
           <span className="card__price">{price} руб.</span>
         </div>
         <button
-          onClick={handleAddCardClick}
+          onClick={
+            isAdded ? () => handleDeleteCardClick(id) : handleAddCardClick
+          }
           style={{
             backgroundImage: `url(${isAdded ? cardAddedImage : cardAddImage})`,
           }}
-          className="card__add"
+          className="card__add-button"
         ></button>
       </div>
     </div>

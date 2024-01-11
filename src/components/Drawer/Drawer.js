@@ -2,7 +2,7 @@ import "./Drawer.css";
 import closeBtn from "../../images/close.svg";
 import GreenButton from "../GreenButton/GreenButton";
 
-function Drawer({ isDrawerOpen, handleDrawerCloseClick, cartItems }) {
+function Drawer({ isDrawerOpen, handleDrawerCloseClick, items }) {
   return (
     <div
       style={{ display: `${isDrawerOpen ? "block" : "none"}` }}
@@ -20,7 +20,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, cartItems }) {
         </h2>
 
         <div className="items">
-          {cartItems.length < 1 ? (
+          {items.length < 1 ? (
             <div className="items__empty">
               <div className="items__empty-img"></div>
               <h3 className="items__empty-title">Корзина пустая</h3>
@@ -30,7 +30,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, cartItems }) {
               <GreenButton title={"Вернуться назад"} />
             </div>
           ) : (
-            cartItems.map((item) => {
+            items.map((item) => {
               return (
                 <div key={item.id} className="cart__item">
                   <div className="cart__item-img">
@@ -38,7 +38,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, cartItems }) {
                       width={80}
                       height={70}
                       src={item.imageUrl}
-                      alt="Картинка кросовок"
+                      alt="Картинка кросcовок"
                     />
                   </div>
 
@@ -52,7 +52,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, cartItems }) {
             })
           )}
         </div>
-        {cartItems.length > 1 ? (
+        {items.length > 0 ? (
           <div className="cart__total">
             <ul className="cart__total-list">
               <li className="cart__total-item">
