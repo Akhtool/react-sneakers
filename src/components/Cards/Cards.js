@@ -4,8 +4,9 @@ import closeBtn from "../../images/close.svg";
 
 import searchLogo from "../../images/search.svg";
 import { useState } from "react";
+import CardsLoader from "../loaders/CardsLoader/CardsLoader";
 
-function Cards({ isLoading, cards }) {
+function Cards({ isCardsLoading, cards }) {
   const [searchValue, setSearchValue] = useState("");
 
   const onChangeSearchValue = (event) => {
@@ -43,24 +44,32 @@ function Cards({ isLoading, cards }) {
         </div>
       </div>
       <div className="cards__list">
-        {cards
-          .filter((item) =>
-            item.title
-              .toLocaleLowerCase()
-              .includes(searchValue.toLocaleLowerCase())
-          )
-          .map((item) => {
-            return (
-              <Card
-                key={item.id}
-                isLoading={isLoading}
-                id={item.id}
-                imageUrl={item.imageUrl}
-                title={item.title}
-                price={item.price}
-              />
-            );
-          })}
+        {isCardsLoading ? (
+          <>
+            {[...Array(4)].map((item, index) => (
+              <CardsLoader key={index} />
+            ))}
+          </>
+        ) : (
+          cards
+            .filter((item) =>
+              item.title
+                .toLocaleLowerCase()
+                .includes(searchValue.toLocaleLowerCase())
+            )
+            .map((item) => {
+              return (
+                <Card
+                  key={item.id}
+                  isCardsLoading={isCardsLoading}
+                  id={item.id}
+                  imageUrl={item.imageUrl}
+                  title={item.title}
+                  price={item.price}
+                />
+              );
+            })
+        )}
       </div>
     </section>
   );

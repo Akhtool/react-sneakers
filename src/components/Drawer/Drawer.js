@@ -1,10 +1,11 @@
 import "./Drawer.css";
+import CartLoader from "../loaders/CartLoader/CartLoader";
 import closeBtn from "../../images/close.svg";
 import GreenButton from "../GreenButton/GreenButton";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 
-function Drawer({ isDrawerOpen, handleDrawerCloseClick }) {
+function Drawer({ isDrawerOpen, handleDrawerCloseClick, isCartItemsLoading }) {
   const { cartItems, setCartItems } = useContext(Context);
 
   const handleDeleteCardClick = (id) => {
@@ -36,6 +37,10 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick }) {
               </p>
               <GreenButton title={"Вернуться назад"} />
             </div>
+          ) : isCartItemsLoading ? (
+            <>
+              {[...Array(3).map((item, index) => <CartLoader key={index} />)]}
+            </>
           ) : (
             cartItems.map((item) => {
               return (
