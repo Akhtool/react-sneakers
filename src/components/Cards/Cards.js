@@ -6,7 +6,7 @@ import searchLogo from "../../images/search.svg";
 import { useState } from "react";
 import CardsLoader from "../loaders/CardsLoader/CardsLoader";
 
-function Cards({ isCardsLoading, cards }) {
+function Cards({ isCardsLoading, cards, onAddToCart, onRemove }) {
   const [searchValue, setSearchValue] = useState("");
 
   const onChangeSearchValue = (event) => {
@@ -66,6 +66,8 @@ function Cards({ isCardsLoading, cards }) {
                   imageUrl={item.imageUrl}
                   title={item.title}
                   price={item.price}
+                  onAddToCart={onAddToCart}
+                  onRemove={onRemove}
                 />
               );
             })

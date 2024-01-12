@@ -8,10 +8,10 @@ import cardLikedImage from "../../images/card-liked.jpg";
 import { Context } from "../../context/Context";
 import axios from "axios";
 
-function Card({ isCardsLoading, id, imageUrl, title, price }) {
+function Card({ id, imageUrl, title, price, onAddToCart, onRemove }) {
   const [isFavourite, setIsFavourite] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const { cartItems, setCartItems } = useContext(Context);
+  const { cartItems } = useContext(Context);
 
   useEffect(() => {
     // Проверяем, есть ли текущая карточка в корзине
@@ -19,26 +19,14 @@ function Card({ isCardsLoading, id, imageUrl, title, price }) {
     setIsAdded(isInCart);
   }, [cartItems, id]);
 
-  const handleAddToCart = (sneaker) => {
-    const existingCartItem = cartItems.find((item) => item.id === sneaker.id);
-    if (!existingCartItem) {
-      setCartItems([...cartItems, sneaker]);
-      axios.post(
-        "https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems",
-        sneaker
-      );
-    }
-  };
-
   const handleAddCardClick = () => {
     setIsAdded(!isAdded);
-    handleAddToCart({ id, imageUrl, title, price });
+    onAddToCart({ id, imageUrl, title, price });
   };
 
   const handleDeleteCardClick = (id) => {
     setIsAdded(!isAdded);
-    axios.delete(`https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems/${id}`);
-    setCartItems(cartItems.filter((item) => item.id !== id));
+    onRemove(id);
   };
 
   const handleToFavouriteClick = () => {

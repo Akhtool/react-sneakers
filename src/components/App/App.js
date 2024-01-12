@@ -44,6 +44,22 @@ function App() {
     setDrawerOpen(false);
   };
 
+  const onAddToCart = (sneaker) => {
+    const existingCartItem = cartItems.find((item) => item.id === sneaker.id);
+    if (!existingCartItem) {
+      setCartItems([...cartItems, sneaker]);
+      axios.post(
+        "https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems",
+        sneaker
+      );
+    }
+  };
+
+  const onRemoveItem = (id) => {
+    axios.delete(`https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems/${id}`);
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
+
   return (
     <Context.Provider
       value={{
@@ -58,11 +74,17 @@ function App() {
           isDrawerOpen={isDrawerOpen}
           handleDrawerCloseClick={handleDrawerCloseClick}
           isCartItemsLoading={isCartItemsLoading}
+          onRemove={onRemoveItem}
         />
         <Header handleDrawerOpenClick={handleDrawerOpenClick} />
         <main>
           <Slider />
-          <Cards isCardsLoading={isCardsLoading} cards={cards} />
+          <Cards
+            isCardsLoading={isCardsLoading}
+            cards={cards}
+            onAddToCart={onAddToCart}
+            onRemove={onRemoveItem}
+          />
         </main>
         <footer className="footer">
           <h3 className="footer__title">React Sneakers by Akhtool</h3>

@@ -1,14 +1,20 @@
 import "./Drawer.css";
 import CartLoader from "../loaders/CartLoader/CartLoader";
 import closeBtn from "../../images/close.svg";
-import GreenButton from "../GreenButton/GreenButton";
+import arrow from "../../images/arrow.svg";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 
-function Drawer({ isDrawerOpen, handleDrawerCloseClick, isCartItemsLoading }) {
+function Drawer({
+  isDrawerOpen,
+  handleDrawerCloseClick,
+  isCartItemsLoading,
+  onRemove,
+}) {
   const { cartItems, setCartItems } = useContext(Context);
 
   const handleDeleteCardClick = (id) => {
+    onRemove(id);
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
   return (
@@ -23,7 +29,7 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, isCartItemsLoading }) {
             className="drawer__close remove-button"
             src={closeBtn}
             alt="Remove"
-            onClick={() => handleDrawerCloseClick()}
+            onClick={handleDrawerCloseClick}
           />
         </h2>
 
@@ -35,7 +41,13 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, isCartItemsLoading }) {
               <p className="items__empty-subtitle">
                 Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
               </p>
-              <GreenButton title={"Вернуться назад"} />
+              <button
+                className="green-button green-button_type-back"
+                onClick={handleDrawerCloseClick}
+              >
+                Вернуться назад
+                <img className="green-button__image" src={arrow} alt="Arrow" />
+              </button>
             </div>
           ) : isCartItemsLoading ? (
             <>
@@ -83,7 +95,13 @@ function Drawer({ isDrawerOpen, handleDrawerCloseClick, isCartItemsLoading }) {
                 <b>1074 руб. </b>
               </li>
             </ul>
-            <GreenButton title={"Оформить заказ"} />
+            <button
+              className="green-button green-button_type-send"
+              onClick={handleDrawerCloseClick}
+            >
+              Оформить заказ
+              <img className="green-button__image" src={arrow} alt="Arrow" />
+            </button>
           </div>
         ) : null}
       </div>
