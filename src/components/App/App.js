@@ -10,9 +10,11 @@ import Cards from "../Cards/Cards.js";
 function App() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [cards, setCards] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [isCardsLoading, setIsCardsLoading] = useState(true);
   const [isCartItemsLoading, setIsCartItemsLoading] = useState(true);
-  const [cartItems, setCartItems] = useState([]);
+  const [isFavoritesLoading, setIsFavoritesLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
 
   const getSneakersCards = () => {
@@ -31,9 +33,21 @@ function App() {
       .finally(() => setIsCartItemsLoading(false));
   };
 
+  const getFavorites = () => {
+    axios
+      .get("https://65a2eb22a54d8e805ed341e0.mockapi.io/favorites")
+      .then((res) => setFavorites(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsFavoritesLoading(false);
+        console.log("favorites>>>>", favorites);
+      });
+  };
+
   useEffect(() => {
     getSneakersCards();
     getCartItems();
+    getFavorites();
   }, []);
 
   const handleDrawerOpenClick = () => {
@@ -60,6 +74,24 @@ function App() {
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
+  const onAddToFavorite = (sneaker) => {
+    const existingFavoriteItem = favorites.find(
+      (item) => item.id === sneaker.id
+    );
+    if (!existingFavoriteItem) {
+      setFavorites([...favorites, sneaker]);
+      axios.post(
+        "https://65a2eb22a54d8e805ed341e0.mockapi.io/favorites",
+        sneaker
+      );
+    }
+  };
+
+  const onRemoveFavorite = (id) => {
+    axios.delete(`https://65a2eb22a54d8e805ed341e0.mockapi.io/favorites/${id}`);
+    setFavorites(favorites.filter((item) => item.id !== id));
+  };
+
   return (
     <Context.Provider
       value={{
@@ -67,6 +99,7 @@ function App() {
         setCartItems,
         isAdded,
         setIsAdded,
+        favorites,
       }}
     >
       <div className="app">
@@ -84,6 +117,8 @@ function App() {
             cards={cards}
             onAddToCart={onAddToCart}
             onRemove={onRemoveItem}
+            onAddToFavorite={onAddToFavorite}
+            onRemoveFavorite={onRemoveFavorite}
           />
         </main>
         <footer className="footer">

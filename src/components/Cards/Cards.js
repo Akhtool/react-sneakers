@@ -6,7 +6,14 @@ import searchLogo from "../../images/search.svg";
 import { useState } from "react";
 import CardsLoader from "../loaders/CardsLoader/CardsLoader";
 
-function Cards({ isCardsLoading, cards, onAddToCart, onRemove }) {
+function Cards({
+  isCardsLoading,
+  cards,
+  onAddToCart,
+  onRemove,
+  onAddToFavorite,
+  onRemoveFavorite,
+}) {
   const [searchValue, setSearchValue] = useState("");
 
   const onChangeSearchValue = (event) => {
@@ -68,6 +75,8 @@ function Cards({ isCardsLoading, cards, onAddToCart, onRemove }) {
                   price={item.price}
                   onAddToCart={onAddToCart}
                   onRemove={onRemove}
+                  onAddToFavorite={onAddToFavorite}
+                  onRemoveFavorite={onRemoveFavorite}
                 />
               );
             })

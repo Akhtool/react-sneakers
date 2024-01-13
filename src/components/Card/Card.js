@@ -1,23 +1,36 @@
 import { useContext, useEffect, useState } from "react";
 import "./Card.css";
-import ContentLoader from "react-content-loader";
 import cardAddImage from "../../images/card-add.png";
 import cardAddedImage from "../../images/card-added.png";
 import cardLikeImage from "../../images/card-like.png";
 import cardLikedImage from "../../images/card-liked.jpg";
 import { Context } from "../../context/Context";
-import axios from "axios";
 
-function Card({ id, imageUrl, title, price, onAddToCart, onRemove }) {
-  const [isFavourite, setIsFavourite] = useState(false);
+function Card({
+  id,
+  imageUrl,
+  title,
+  price,
+  onAddToCart,
+  onRemove,
+  onAddToFavorite,
+  onRemoveFavorite,
+}) {
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const { cartItems } = useContext(Context);
+  const { cartItems, favorites } = useContext(Context);
 
   useEffect(() => {
     // Проверяем, есть ли текущая карточка в корзине
     const isInCart = cartItems.some((item) => item.id === id);
     setIsAdded(isInCart);
   }, [cartItems, id]);
+
+  useEffect(() => {
+    // Проверяем, есть ли текущая карточка в избранных
+    const isInFavorites = favorites.some((item) => item.id === id);
+    setIsFavorite(isInFavorites);
+  }, [favorites, id]);
 
   const handleAddCardClick = () => {
     setIsAdded(!isAdded);
@@ -30,16 +43,26 @@ function Card({ id, imageUrl, title, price, onAddToCart, onRemove }) {
   };
 
   const handleToFavouriteClick = () => {
-    setIsFavourite(!isFavourite);
+    setIsFavorite(!isFavorite);
+    onAddToFavorite({ id, imageUrl, title, price });
+  };
+
+  const handleDeleteFavoriteClick = (id) => {
+    setIsFavorite(!isFavorite);
+    onRemoveFavorite(id);
   };
 
   return (
     <div className="card">
       <button
-        onClick={handleToFavouriteClick}
+        onClick={
+          isFavorite
+            ? () => handleDeleteFavoriteClick(id)
+            : handleToFavouriteClick
+        }
         style={{
           backgroundImage: `url(${
-            isFavourite ? cardLikedImage : cardLikeImage
+            isFavorite ? cardLikedImage : cardLikeImage
           })`,
         }}
         className="card__like"
