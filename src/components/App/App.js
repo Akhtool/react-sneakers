@@ -4,17 +4,22 @@ import axios from "axios";
 import "./App.css";
 import Header from "../Header/Header.js";
 import Drawer from "../Drawer/Drawer.js";
-import Slider from "../Slider/Slider.js";
-import Cards from "../Cards/Cards.js";
+import Home from "../../pages/Home.js";
+import Purchases from "../../pages/Purchases.js";
+import Profile from "../../pages/Profile.js";
+import { Routes, Route } from "react-router-dom";
+import Favorites from "../../pages/Favorites.js";
 
 function App() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [cards, setCards] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [purchases, setPurchases] = useState([]);
   const [isCardsLoading, setIsCardsLoading] = useState(true);
   const [isCartItemsLoading, setIsCartItemsLoading] = useState(true);
   const [isFavoritesLoading, setIsFavoritesLoading] = useState(true);
+  const [isPurchasesLoading, setIsPurchasesLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
 
   const getSneakersCards = () => {
@@ -40,7 +45,6 @@ function App() {
       .catch((err) => console.log(err))
       .finally(() => {
         setIsFavoritesLoading(false);
-        console.log("favorites>>>>", favorites);
       });
   };
 
@@ -100,6 +104,7 @@ function App() {
         isAdded,
         setIsAdded,
         favorites,
+        purchases,
       }}
     >
       <div className="app">
@@ -110,17 +115,39 @@ function App() {
           onRemove={onRemoveItem}
         />
         <Header handleDrawerOpenClick={handleDrawerOpenClick} />
-        <main>
-          <Slider />
-          <Cards
-            isCardsLoading={isCardsLoading}
-            cards={cards}
-            onAddToCart={onAddToCart}
-            onRemove={onRemoveItem}
-            onAddToFavorite={onAddToFavorite}
-            onRemoveFavorite={onRemoveFavorite}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                isCardsLoading={isCardsLoading}
+                cards={cards}
+                onAddToCart={onAddToCart}
+                onRemove={onRemoveItem}
+                onAddToFavorite={onAddToFavorite}
+                RemoveFavorite={onRemoveFavorite}
+              />
+            }
+            exact
           />
-        </main>
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                isFavoritesLoading={isFavoritesLoading}
+                onAddToFavorite={onAddToFavorite}
+              />
+            }
+            exact
+          />
+          <Route
+            path="/purchases"
+            element={<Purchases isPurchasesLoading={isPurchasesLoading} />}
+            exact
+          ></Route>
+          <Route path="/profile" element={<Profile />} exact></Route>
+        </Routes>
+
         <footer className="footer">
           <h3 className="footer__title">React Sneakers by Akhtool</h3>
         </footer>

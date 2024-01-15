@@ -4,22 +4,22 @@ import { useContext } from "react";
 import CardsLoader from "../components/loaders/CardsLoader/CardsLoader";
 import { Context } from "../context/Context";
 
-function Favorites({ isFavoritesLoading, onAddToFavorite }) {
-  const { favorites } = useContext(Context);
+function Purchases({ isPurchasesLoading, onAddToFavorite }) {
+  const { purchases } = useContext(Context);
   return (
     <section className="cards">
       <div className="cards__top">
         <h1 className="cards__top-title">Избранное</h1>
       </div>
       <div className="cards__list">
-        {isFavoritesLoading ? (
+        {isPurchasesLoading ? (
           <>
             {[...Array(4)].map((item, index) => (
               <CardsLoader key={index} />
             ))}
           </>
         ) : (
-          favorites.map((item) => {
+          purchases.map((item) => {
             return (
               <Card
                 key={item.id}
@@ -35,4 +35,4 @@ function Favorites({ isFavoritesLoading, onAddToFavorite }) {
   );
 }
 
-export default Favorites;
+export default Purchases;
