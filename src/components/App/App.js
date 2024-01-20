@@ -5,8 +5,8 @@ import "./App.css";
 import Header from "../Header/Header.js";
 import Drawer from "../Drawer/Drawer.js";
 import Home from "../../pages/Home.js";
-import Purchases from "../../pages/Purchases.js";
-import Profile from "../../pages/Profile.js";
+import Orders from "../../pages/Orders.js";
+import Profile from "../../pages/Profile/Profile.js";
 import { Routes, Route } from "react-router-dom";
 import Favorites from "../../pages/Favorites/Favorites.js";
 
@@ -15,17 +15,17 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [purchases, setPurchases] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [isCardsLoading, setIsCardsLoading] = useState(true);
   const [isCartItemsLoading, setIsCartItemsLoading] = useState(true);
   const [isFavoritesLoading, setIsFavoritesLoading] = useState(true);
-  const [isPurchasesLoading, setIsPurchasesLoading] = useState(true);
+  const [isOrdersLoading, setIsOrdersLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
 
   const SNEAKERS_URL = 'http://localhost:3001/sneakers';
   const CART_ITEMS_URL = 'http://localhost:3001/cartItems';
   const FAVORITES_URL = 'http://localhost:3001/favorites';
-  // const PURCHASES_URL = 'http://localhost:3001/purchases';
+  const ORDERS_URL = 'http://localhost:3001/orders';
 
 
   const getSneakersCards = () => {
@@ -54,10 +54,20 @@ function App() {
       });
   };
 
+  const getOrders = () => {
+    axios.get(ORDERS_URL)
+    .then((res) => setOrders(res.data))
+    .catch((err) => console.log(err))
+    .finally(() => {
+      setIsOrdersLoading(false);
+    })
+  }
+
   useEffect(() => {
     getSneakersCards();
     getCartItems();
     getFavorites();
+    getOrders();
   }, []);
 
   const handleDrawerOpenClick = () => {
@@ -110,7 +120,7 @@ function App() {
         isAdded,
         setIsAdded,
         favorites,
-        purchases,
+        orders,
       }}
     >
       <div className="app">
@@ -148,8 +158,8 @@ function App() {
             exact
           />
           <Route
-            path="/purchases"
-            element={<Purchases isPurchasesLoading={isPurchasesLoading} />}
+            path="/orders"
+            element={<Orders isOrdersLoading={isOrdersLoading} />}
             exact
           ></Route>
           <Route path="/profile" element={<Profile />} exact></Route>

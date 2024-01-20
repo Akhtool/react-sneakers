@@ -4,27 +4,25 @@ import { useContext } from "react";
 import CardsLoader from "../components/loaders/CardsLoader/CardsLoader";
 import { Context } from "../context/Context";
 
-function Purchases({ isPurchasesLoading, onAddToFavorite }) {
-  const { purchases } = useContext(Context);
+function Orders({ isOrdersLoading, onAddToFavorite }) {
+  const { orders } = useContext(Context);
   return (
     <section className="cards">
       <div className="cards__top">
-        <h1 className="cards__top-title">Избранное</h1>
+        <h1 className="cards__top-title">Мои заказы</h1>
       </div>
       <div className="cards__list">
-        {isPurchasesLoading ? (
+        {isOrdersLoading ? (
           <>
             {[...Array(4)].map((item, index) => (
               <CardsLoader key={index} />
             ))}
           </>
         ) : (
-          purchases.map((item) => {
+          orders.map((item) => {
             return (
               <Card
                 key={item.id}
-                favorited={true}
-                onFavorite={onAddToFavorite}
                 {...item}
               />
             );
@@ -35,4 +33,4 @@ function Purchases({ isPurchasesLoading, onAddToFavorite }) {
   );
 }
 
-export default Purchases;
+export default Orders;

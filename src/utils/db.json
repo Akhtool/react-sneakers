@@ -85,34 +85,9 @@
       "price": "11 299"
     }
   ],
-  "cartItems": [
-    {
-      "id": "1",
-      "imageUrl": "https://1.downloader.disk.yandex.ru/preview/20347bfaf2750dccaad2d64bd18264d21f83fcf0a92babd113fe9263e39bb63d/inf/v1piwoNJ4vqqTT3t1On3S6_OjVZ7ykRS916AkOWgivvTiCGbq9Xq8MJyG1jYVJQkgI3PbhelumaqsrB-9hcB5Q%3D%3D?uid=101655936&filename=sneakers-1.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=101655936&tknv=v2&size=2560x1294",
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": "12 999"
-    },
-    {
-      "id": "2",
-      "imageUrl": "https://4.downloader.disk.yandex.ru/preview/49325921540216dc9b3fd0de7e87bb8b484cd3b1ded429b3ed1d4e3fa9ed0ea2/inf/vw2o7U0ORIFU-D4lfzP_iK_OjVZ7ykRS916AkOWgivs6J1cpWXsVtiIs2v4SkS03mroyo3jE2TEJ47BUV8fWkQ%3D%3D?uid=101655936&filename=sneakers-2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=101655936&tknv=v2&size=2560x1294",
-      "title": "Мужские Кроссовки Nike Air Max 270",
-      "price": "12 999"
-    },
-    {
-      "id": "3",
-      "imageUrl": "https://1.downloader.disk.yandex.ru/preview/5d7f16d2422386023909db23c9d9c3ef052da06d079ba98a03ff2abff5b26055/inf/B8oSjppNqyTBaGHOHlH0JcUb_qTPyQyOQolCOr-GkhizD6EYXv4BWINmlTOQ5vDR9yklYzyZ0FYN8hP-CxnLPw%3D%3D?uid=101655936&filename=sneakers-3.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=101655936&tknv=v2&size=2560x1294",
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": "8 499"
-    },
-    {
-      "id": "4",
-      "imageUrl": "https://3.downloader.disk.yandex.ru/preview/95fc6f35b59b44e69dadac8971bc675ecc480b53d4193f58b10e1db8b6bf6905/inf/jLy5arCjsCzNcJXA0ZIj2oMHPR6xnS9Bm0-jdJT5q19dIXEcgYsyXbMQRuKcMIvrdS7CLhb8WiXuL7qvupNyGA%3D%3D?uid=101655936&filename=sneakers-4.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=101655936&tknv=v2&size=2560x1294",
-      "title": "Кроссовки Puma X Aka Boku Future Rider",
-      "price": "8 999"
-    }
-  ],
+  "cartItems": [],
   "favorites": [],
-  "purchases": [
+  "orders": [
     {
       "sneakerId": "1",
       "id": "1",
