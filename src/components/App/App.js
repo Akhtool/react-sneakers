@@ -22,9 +22,15 @@ function App() {
   const [isPurchasesLoading, setIsPurchasesLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
 
+  const SNEAKERS_URL = 'http://localhost:3001/sneakers';
+  const CART_ITEMS_URL = 'http://localhost:3001/cartItems';
+  const FAVORITES_URL = 'http://localhost:3001/favorites';
+  // const PURCHASES_URL = 'http://localhost:3001/purchases';
+
+
   const getSneakersCards = () => {
     axios
-      .get("https://6596652f6bb4ec36ca02849f.mockapi.io/sneakers")
+      .get(SNEAKERS_URL)
       .then((res) => setCards(res.data))
       .catch((err) => console.log(err))
       .finally(() => setIsCardsLoading(false));
@@ -32,7 +38,7 @@ function App() {
 
   const getCartItems = () => {
     axios
-      .get("https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems")
+      .get(CART_ITEMS_URL)
       .then((res) => setCartItems(res.data))
       .catch((err) => console.log(err))
       .finally(() => setIsCartItemsLoading(false));
@@ -40,7 +46,7 @@ function App() {
 
   const getFavorites = () => {
     axios
-      .get("https://65a2eb22a54d8e805ed341e0.mockapi.io/favorites")
+      .get(FAVORITES_URL)
       .then((res) => setFavorites(res.data))
       .catch((err) => console.log(err))
       .finally(() => {
@@ -67,14 +73,14 @@ function App() {
     if (!existingCartItem) {
       setCartItems([...cartItems, sneaker]);
       axios.post(
-        "https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems",
+        CART_ITEMS_URL,
         sneaker
       );
     }
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://6596652f6bb4ec36ca02849f.mockapi.io/cartItems/${id}`);
+    axios.delete(`${CART_ITEMS_URL}/${id}`);
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
@@ -85,15 +91,14 @@ function App() {
     if (!existingFavoriteItem) {
       setFavorites([...favorites, sneaker]);
       axios.post(
-        "https://65a2eb22a54d8e805ed341e0.mockapi.io/favorites",
+        FAVORITES_URL,
         sneaker
       );
     }
   };
 
   const onRemoveFavorite = (id) => {
-    axios.delete(`https://65a2eb22a54d8e805ed341e0.mockapi.io/favorites/${id}`);
-    setFavorites(favorites.filter((item) => item.id !== id));
+    axios.delete(`${FAVORITES_URL}/${id}`);
   };
 
   return (
@@ -125,7 +130,7 @@ function App() {
                 onAddToCart={onAddToCart}
                 onRemove={onRemoveItem}
                 onAddToFavorite={onAddToFavorite}
-                RemoveFavorite={onRemoveFavorite}
+                onRemoveFavorite={onRemoveFavorite}
               />
             }
             exact
@@ -136,6 +141,7 @@ function App() {
               <Favorites
                 isFavoritesLoading={isFavoritesLoading}
                 onAddToFavorite={onAddToFavorite}
+                onRemoveFavorite={onRemoveFavorite}
               />
             }
             exact

@@ -11,6 +11,7 @@
 .cards__top {
   display: flex;
   justify-content: space-between;
+  margin-top: 37px;
   margin-bottom: 37px;
 }
 .cards__top-title {

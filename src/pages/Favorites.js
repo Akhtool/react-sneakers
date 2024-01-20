@@ -4,8 +4,10 @@ import { useContext } from "react";
 import CardsLoader from "../components/loaders/CardsLoader/CardsLoader";
 import { Context } from "../context/Context";
 
-function Favorites({ isFavoritesLoading, onAddToFavorite }) {
+function Favorites({ isFavoritesLoading, onAddToFavorite, onRemoveFavorite }) {
+
   const { favorites } = useContext(Context);
+
   return (
     <section className="cards">
       <div className="cards__top">
@@ -23,8 +25,8 @@ function Favorites({ isFavoritesLoading, onAddToFavorite }) {
             return (
               <Card
                 key={item.id}
-                favorited={true}
                 onFavorite={onAddToFavorite}
+                onRemoveFavorite={onRemoveFavorite}
                 {...item}
               />
             );

@@ -68,11 +68,11 @@ function Cards({
               return (
                 <Card
                   key={item.id}
-                  isCardsLoading={isCardsLoading}
                   id={item.id}
                   imageUrl={item.imageUrl}
                   title={item.title}
                   price={item.price}
+                  isCardsLoading={isCardsLoading}
                   onAddToCart={onAddToCart}
                   onRemove={onRemove}
                   onAddToFavorite={onAddToFavorite}
