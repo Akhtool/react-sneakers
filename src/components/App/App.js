@@ -8,7 +8,7 @@ import Home from "../../pages/Home.js";
 import Purchases from "../../pages/Purchases.js";
 import Profile from "../../pages/Profile.js";
 import { Routes, Route } from "react-router-dom";
-import Favorites from "../../pages/Favorites.js";
+import Favorites from "../../pages/Favorites/Favorites.js";
 
 function App() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -99,6 +99,7 @@ function App() {
 
   const onRemoveFavorite = (id) => {
     axios.delete(`${FAVORITES_URL}/${id}`);
+    setFavorites(favorites.filter((item) => item.id !== id));
   };
 
   return (
