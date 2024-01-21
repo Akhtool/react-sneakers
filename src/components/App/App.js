@@ -151,6 +151,8 @@ function App() {
             element={
               <Favorites
                 isFavoritesLoading={isFavoritesLoading}
+                onAddToCart={onAddToCart}
+                onRemove={onRemoveItem}
                 onAddToFavorite={onAddToFavorite}
                 onRemoveFavorite={onRemoveFavorite}
               />
@@ -159,7 +161,10 @@ function App() {
           />
           <Route
             path="/orders"
-            element={<Orders isOrdersLoading={isOrdersLoading} />}
+            element={<Orders isOrdersLoading={isOrdersLoading} onAddToCart={onAddToCart}
+            onRemove={onRemoveItem}
+            onAddToFavorite={onAddToFavorite}
+            onRemoveFavorite={onRemoveFavorite}/>}
             exact
           ></Route>
           <Route path="/profile" element={<Profile />} exact></Route>

@@ -1,13 +1,12 @@
 import "../../components/Cards/Cards.css";
 import './Favorites.css'
 import Card from "../../components/Card/Card";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CardsLoader from "../../components/loaders/CardsLoader/CardsLoader";
 import { Context } from "../../context/Context";
-import arrow from "../../images/arrow.svg";
+import Info from "../../components/Info/Info";
 
-function Favorites({ isFavoritesLoading, onAddToFavorite, onRemoveFavorite }) {
+function Favorites({ isFavoritesLoading,onAddToCart, onRemoveItem, onAddToFavorite, onRemoveFavorite }) {
 
   const { favorites } = useContext(Context);
 
@@ -31,6 +30,8 @@ function Favorites({ isFavoritesLoading, onAddToFavorite, onRemoveFavorite }) {
             return (
               <Card
                 key={item.id}
+                onAddToCart={onAddToCart}
+                onRemove={onRemoveItem}
                 onFavorite={onAddToFavorite}
                 onRemoveFavorite={onRemoveFavorite}
                 {...item}
@@ -40,21 +41,7 @@ function Favorites({ isFavoritesLoading, onAddToFavorite, onRemoveFavorite }) {
         )}
       </div>
         ) : (
-          <div className="favorites__empty">
-              <div className="favorites__empty-img"></div>
-              <h3 className="favorites__empty-title">{"Избранных кроссовок нет :("}</h3>
-              <p className="favorites__empty-subtitle">
-              Вы ничего не добавляли в избранное
-              </p>
-              <Link to="/">
-              <button
-                className="green-button green-button_type-back"
-              >
-                Вернуться назад
-                <img className="green-button__image" src={arrow} alt="Arrow" />
-              </button>
-              </Link>
-            </div>
+          <Info title={"Избранных кроссовок нет :("} subtitle={'Вы ничего не добавляли в избранное'} pathTo={"/"}/>
         )
       }
       
