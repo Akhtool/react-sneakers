@@ -2,8 +2,13 @@ import "./Drawer.css";
 import CartLoader from "../loaders/CartLoader/CartLoader";
 import closeBtn from "../../images/close.svg";
 import arrow from "../../images/arrow.svg";
-import { useContext } from "react";
+import cartEmptyImg from '../../images/cart-empty.png'
+import orderCompleteImg from '../../images/order-compleate.png';
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
+import axios from "axios";
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({
   isDrawerOpen,
@@ -11,12 +16,44 @@ function Drawer({
   isCartItemsLoading,
   onRemove,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOrderComplete, setIsOrderComplete] = useState(false);
+  const [orderId, setOrderId] = useState(null);
   const { cartItems, setCartItems } = useContext(Context);
+
+  const onClickDrawerClose = () => {
+    handleDrawerCloseClick()
+    setIsOrderComplete(false);
+  }
 
   const handleDeleteCardClick = (id) => {
     onRemove(id);
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
+
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post("http://localhost:3001/orders", {
+        items: cartItems,
+      });
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete("http://localhost:3001/cartItems/" + item.id);
+        await delay(100);
+      }
+
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+    } catch (err) {
+      alert("Error while creating order");
+      console.log(err);
+    }
+    setIsLoading(false);
+  };
+
   return (
     <div
       style={{ display: `${isDrawerOpen ? "block" : "none"}` }}
@@ -29,26 +66,30 @@ function Drawer({
             className="drawer__close remove-button"
             src={closeBtn}
             alt="Remove"
-            onClick={handleDrawerCloseClick}
+            onClick={onClickDrawerClose}
           />
         </h2>
 
         <div className="items">
           {cartItems.length < 1 ? (
             <div className="items__empty">
-              <div className="items__empty-img"></div>
-              <h3 className="items__empty-title">Корзина пустая</h3>
-              <p className="items__empty-subtitle">
-                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-              </p>
-              <button
-                className="green-button green-button_type-back"
-                onClick={handleDrawerCloseClick}
-              >
-                Вернуться назад
-                <img className="green-button__image" src={arrow} alt="Arrow" />
-              </button>
-            </div>
+            <img className='items__empty-img' src={isOrderComplete ? orderCompleteImg : cartEmptyImg} alt='Smile'/>
+            <h3 className="items__empty-title">{isOrderComplete ? "Заказ оформлен" : "Корзина пустая"}</h3>
+            <p className="items__empty-subtitle">
+            {
+              isOrderComplete
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
+            }
+            </p>
+            <button
+              className="green-button green-button_type-back"
+              onClick={onClickDrawerClose}
+            >
+              Вернуться назад
+              <img className="green-button__image" src={arrow} alt="Arrow" />
+            </button>
+          </div>
           ) : isCartItemsLoading ? (
             <>
               {[...Array(3).map((item, index) => <CartLoader key={index} />)]}
@@ -97,7 +138,7 @@ function Drawer({
             </ul>
             <button
               className="green-button green-button_type-send"
-              onClick={handleDrawerCloseClick}
+              onClick={onClickOrder}
             >
               Оформить заказ
               <img className="green-button__image" src={arrow} alt="Arrow" />

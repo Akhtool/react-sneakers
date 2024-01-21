@@ -105,12 +105,7 @@
 }
 .items__empty-img {
   margin: 0 0 21px 0;
-  width: 120px;
   height: 120px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(../../images/cart-empty.png);
 }
 
 .items__empty-title {
