@@ -19,7 +19,7 @@ function Drawer({
   const [isLoading, setIsLoading] = useState(false);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
-  const { cartItems, setCartItems, setOrders } = useContext(Context);
+  const { cartItems, setCartItems, setOrders, totalPrice } = useContext(Context);
 
   const onClickDrawerClose = () => {
     handleDrawerCloseClick()
@@ -35,6 +35,7 @@ function Drawer({
     try {
       const { data } = await axios.post("http://localhost:3001/orders", {
         items: cartItems,
+        totalPrice: totalPrice,
       });
 
       for (let i = 0; i < cartItems.length; i++) {
@@ -130,12 +131,12 @@ function Drawer({
               <li className="cart__total-item">
                 <span>Итого:</span>
                 <div className="cart__total-line"></div>
-                <b>21 498 руб. </b>
+                <b>{totalPrice} руб.</b>
               </li>
               <li className="cart__total-item">
                 <span>Налог 5%:</span>
                 <div className="cart__total-line"></div>
-                <b>1074 руб. </b>
+                <b>{Math.round((5 / 100) * totalPrice)} руб.</b>
               </li>
             </ul>
             <button

@@ -27,6 +27,7 @@ function App() {
   const FAVORITES_URL = 'http://localhost:3001/favorites';
   const ORDERS_URL = 'http://localhost:3001/orders';
 
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
   const getSneakersCards = () => {
     axios
@@ -122,7 +123,8 @@ function App() {
         setIsAdded,
         favorites,
         orders,
-        setOrders
+        setOrders,
+        totalPrice
       }}
     >
       <div className="app">

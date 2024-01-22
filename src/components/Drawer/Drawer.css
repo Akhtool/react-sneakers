@@ -76,9 +76,14 @@
   opacity: 1;
 }
 
+.cart__total {
+  width: 325px;
+}
+
 .cart__total-list {
   display: block;
   margin-bottom: 40px !important;
+  padding: 0
 }
 
 .cart__total-item {

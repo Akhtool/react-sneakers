@@ -27,6 +27,7 @@ function Orders({ isOrdersLoading, onAddToCart, onRemoveItem, onAddToFavorite, o
           orders.map((item) => (
             <div key={item.id} className="order__container">
               <h3>Заказ №{item.id}</h3>
+              <h3>На сумму: {item.totalPrice}</h3>
               <div className="order__items-list">
                 {item.items.map((item) => (
               <Card
