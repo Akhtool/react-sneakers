@@ -1,9 +1,10 @@
-import "../components/Cards/Cards.css";
-import Card from "../components/Card/Card";
-import Info from "../components/Info/Info";
+import "./Orders.css"
+import "../../components/Cards/Cards.css";
+import Card from "../../components/Card/Card";
+import Info from "../../components/Info/Info";
 import { useContext } from "react";
-import CardsLoader from "../components/loaders/CardsLoader/CardsLoader";
-import { Context } from "../context/Context";
+import CardsLoader from "../../components/loaders/CardsLoader/CardsLoader";
+import { Context } from "../../context/Context";
 
 function Orders({ isOrdersLoading, onAddToCart, onRemoveItem, onAddToFavorite, onRemoveFavorite }) {
   const { orders } = useContext(Context);
@@ -23,8 +24,11 @@ function Orders({ isOrdersLoading, onAddToCart, onRemoveItem, onAddToFavorite, o
             ))}
           </>
         ) : (
-          orders.map((item) => {
-            return (
+          orders.map((item) => (
+            <div key={item.id} className="order__container">
+              <h3>Заказ №{item.id}</h3>
+              <div className="order__items-list">
+                {item.items.map((item) => (
               <Card
                 key={item.id}
                 {...item}
@@ -33,8 +37,10 @@ function Orders({ isOrdersLoading, onAddToCart, onRemoveItem, onAddToFavorite, o
                 onAddToFavorite={onAddToFavorite}
                 onRemoveFavorite={onRemoveFavorite}
               />
-            );
-          })
+            ))}
+              </div>
+            </div>
+          ))
         )}
         </div>
         ) : (<Info title={"У вас нет заказов"} subtitle={'Вы нищеброд? Оформите хотя бы один заказ.'} pathTo={"/profile"}/>

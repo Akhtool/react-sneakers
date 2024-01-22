@@ -5,7 +5,7 @@ import "./App.css";
 import Header from "../Header/Header.js";
 import Drawer from "../Drawer/Drawer.js";
 import Home from "../../pages/Home.js";
-import Orders from "../../pages/Orders.js";
+import Orders from "../../pages/Orders/Orders.js";
 import Profile from "../../pages/Profile/Profile.js";
 import { Routes, Route } from "react-router-dom";
 import Favorites from "../../pages/Favorites/Favorites.js";
@@ -70,6 +70,7 @@ function App() {
     getOrders();
   }, []);
 
+
   const handleDrawerOpenClick = () => {
     setDrawerOpen(true);
   };
@@ -121,6 +122,7 @@ function App() {
         setIsAdded,
         favorites,
         orders,
+        setOrders
       }}
     >
       <div className="app">

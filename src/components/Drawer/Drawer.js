@@ -19,7 +19,7 @@ function Drawer({
   const [isLoading, setIsLoading] = useState(false);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
-  const { cartItems, setCartItems } = useContext(Context);
+  const { cartItems, setCartItems, setOrders } = useContext(Context);
 
   const onClickDrawerClose = () => {
     handleDrawerCloseClick()
@@ -33,7 +33,6 @@ function Drawer({
 
   const onClickOrder = async () => {
     try {
-      setIsLoading(true);
       const { data } = await axios.post("http://localhost:3001/orders", {
         items: cartItems,
       });
@@ -44,6 +43,10 @@ function Drawer({
         await delay(100);
       }
 
+      axios.get('http://localhost:3001/orders')
+      .then((res) => setOrders(res.data))
+      .catch((err) => console.log(err))
+
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
@@ -51,7 +54,6 @@ function Drawer({
       alert("Error while creating order");
       console.log(err);
     }
-    setIsLoading(false);
   };
 
   return (
