@@ -114,6 +114,10 @@ function App() {
     setFavorites(favorites.filter((item) => item.id !== id));
   };
 
+  // const onSearchClick = () => {
+  //   axios.get(`${SNEAKERS_URL}/media?title_like=${searchValue}`)
+  // }
+
   return (
     <Context.Provider
       value={{
@@ -124,7 +128,9 @@ function App() {
         favorites,
         orders,
         setOrders,
-        totalPrice
+        totalPrice,
+        setCards,
+        setIsCardsLoading
       }}
     >
       <div className="app">
