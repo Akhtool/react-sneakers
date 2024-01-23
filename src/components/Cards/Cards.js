@@ -1,10 +1,12 @@
 import "./Cards.css";
 import Card from "../Card/Card";
 import closeBtn from "../../images/close.svg";
+import backButton from '../../images/button-back.svg';
 import searchArrow from '../../images/search-arrow.png'
 import searchArrowDisabled from '../../images/search-arrow-disabled.png';
 import searchLogo from "../../images/search.svg";
 import { useContext, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import CardsLoader from "../loaders/CardsLoader/CardsLoader";
 import { Context } from '../../context/Context';
 import axios from "axios";
@@ -20,6 +22,8 @@ function Cards({
   const [searchValue, setSearchValue] = useState("");
   const { setCards, setIsCardsLoading } = useContext(Context);
 
+  const location = useLocation();
+
   const onChangeSearchValue = (event) => {
     setSearchValue(event.target.value);
   };
@@ -34,12 +38,30 @@ function Cards({
       .finally(() => setIsCardsLoading(false));
   }
 
+  const onEnter = event => {
+    event.preventDefault();
+    console.log(event.key);
+    if (event.key === 'Enter') {
+      console.log('Enter')
+    }
+  }
+
   return (
     <section className="cards">
       <div className="cards__top">
-        <h1 className="cards__top-title">
-          {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}
-        </h1>
+        {location.pathname === '/' 
+        ? <h1 className="cards__top-title">
+        {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}
+      </h1>
+        : <div className="cards__top-title-container">
+        <button className="cards__back-button">
+        <img src={backButton} alt="Назад"/>
+      </button>
+      <h1 className="cards__top-title">
+        {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}
+      </h1>
+      </div>
+      } 
         <div className="cards__top-search">
           <img
             className="cards__top-search-logo"
@@ -63,7 +85,7 @@ function Cards({
             onChange={onChangeSearchValue}
           />
           {searchValue 
-          ? (<button onClick={onSearchClick} className="cards__top-search-arrow-btn">
+          ? (<button onKeyDown={onEnter} onClick={onSearchClick} className="cards__top-search-arrow-btn">
               <img className="cards__top-search-arrow-btn-img" src={searchArrow} />
             </button>)
           : (<button className="cards__top-search-arrow-btn" disabled>

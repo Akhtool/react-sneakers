@@ -2,16 +2,22 @@ import "./Orders.css"
 import "../../components/Cards/Cards.css";
 import Card from "../../components/Card/Card";
 import Info from "../../components/Info/Info";
+import backButton from '../../images/button-back.svg';
 import { useContext } from "react";
 import CardsLoader from "../../components/loaders/CardsLoader/CardsLoader";
 import { Context } from "../../context/Context";
 
 function Orders({ isOrdersLoading, onAddToCart, onRemoveItem, onAddToFavorite, onRemoveFavorite }) {
-  const { orders } = useContext(Context);
+  const { orders, goBack } = useContext(Context);
   return (
     <section className="cards">
       <div className="cards__top">
-        <h1 className="cards__top-title">Мои заказы</h1>
+      <div className="cards__top-title-container">
+        <button className="cards__back-button">
+        <img src={backButton} alt="Назад" onClick={goBack}/>
+      </button>
+      <h1 className="cards__top-title">Мои заказы</h1>
+      </div>
       </div>
         {
           orders.length > 0 ? 
@@ -26,15 +32,14 @@ function Orders({ isOrdersLoading, onAddToCart, onRemoveItem, onAddToFavorite, o
         ) : (
           orders.map((item) => (
             <div key={item.id} className="order__container">
-              <h3>Заказ №{item.id}</h3>
-              <h3>На сумму: {item.totalPrice}</h3>
+              <h2>Заказ №{item.id}</h2>
+              <h3>На сумму: {item.totalPrice} руб.</h3>
               <div className="order__items-list">
                 {item.items.map((item) => (
               <Card
                 key={item.id}
                 {...item}
                 onAddToCart={onAddToCart}
-                onRemove={onRemoveItem}
                 onAddToFavorite={onAddToFavorite}
                 onRemoveFavorite={onRemoveFavorite}
               />

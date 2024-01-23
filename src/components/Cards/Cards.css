@@ -23,6 +23,29 @@
   font-weight: 700;
   line-height: normal;
 }
+
+.cards__top-title-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.cards__back-button {
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  padding: 0;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.cards__back-button:hover {
+  opacity: 1;
+}
+
 .cards__top-search {
   position: relative;
   border: 1px solid #f3f3f3;

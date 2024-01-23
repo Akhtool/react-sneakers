@@ -12,13 +12,12 @@ function Card({
   title,
   price,
   onAddToCart,
-  onRemove,
   onAddToFavorite,
   onRemoveFavorite,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const { cartItems, favorites } = useContext(Context);
+  const { cartItems, favorites, onRemoveItem } = useContext(Context);
 
   useEffect(() => {
     // Проверяем, есть ли текущая карточка в корзине
@@ -39,7 +38,7 @@ function Card({
 
   const handleDeleteCardClick = (id) => {
     setIsAdded(!isAdded);
-    onRemove(id);
+    onRemoveItem(id);
   };
 
   const handleToFavouriteClick = () => {

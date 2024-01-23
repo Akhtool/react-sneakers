@@ -3,17 +3,23 @@ import './Favorites.css'
 import Card from "../../components/Card/Card";
 import { useContext } from "react";
 import CardsLoader from "../../components/loaders/CardsLoader/CardsLoader";
+import backButton from '../../images/button-back.svg';
 import { Context } from "../../context/Context";
 import Info from "../../components/Info/Info";
 
 function Favorites({ isFavoritesLoading,onAddToCart, onRemoveItem, onAddToFavorite, onRemoveFavorite }) {
 
-  const { favorites } = useContext(Context);
+  const { favorites, goBack } = useContext(Context);
 
   return (
     <section className="cards">
       <div className="cards__top">
-        <h1 className="cards__top-title">Избранное</h1>
+      <div className="cards__top-title-container">
+        <button className="cards__back-button" onClick={goBack}>
+        <img src={backButton} alt="Назад"/>
+      </button>
+      <h1 className="cards__top-title">Избранное</h1>
+      </div>
       </div>
       {
         favorites.length > 0 ? 
@@ -31,7 +37,6 @@ function Favorites({ isFavoritesLoading,onAddToCart, onRemoveItem, onAddToFavori
               <Card
                 key={item.id}
                 onAddToCart={onAddToCart}
-                onRemove={onRemoveItem}
                 onFavorite={onAddToFavorite}
                 onRemoveFavorite={onRemoveFavorite}
                 {...item}

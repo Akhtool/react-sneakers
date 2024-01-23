@@ -7,7 +7,7 @@ import Drawer from "../Drawer/Drawer.js";
 import Home from "../../pages/Home.js";
 import Orders from "../../pages/Orders/Orders.js";
 import Profile from "../../pages/Profile/Profile.js";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Favorites from "../../pages/Favorites/Favorites.js";
 
 function App() {
@@ -28,6 +28,9 @@ function App() {
   const ORDERS_URL = 'http://localhost:3001/orders';
 
   const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
 
   const getSneakersCards = () => {
     axios
@@ -130,7 +133,9 @@ function App() {
         setOrders,
         totalPrice,
         setCards,
-        setIsCardsLoading
+        setIsCardsLoading,
+        onRemoveItem,
+        goBack
       }}
     >
       <div className="app">
@@ -149,7 +154,6 @@ function App() {
                 isCardsLoading={isCardsLoading}
                 cards={cards}
                 onAddToCart={onAddToCart}
-                onRemove={onRemoveItem}
                 onAddToFavorite={onAddToFavorite}
                 onRemoveFavorite={onRemoveFavorite}
               />
@@ -172,7 +176,6 @@ function App() {
           <Route
             path="/orders"
             element={<Orders isOrdersLoading={isOrdersLoading} onAddToCart={onAddToCart}
-            onRemove={onRemoveItem}
             onAddToFavorite={onAddToFavorite}
             onRemoveFavorite={onRemoveFavorite}/>}
             exact

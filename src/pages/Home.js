@@ -17,7 +17,6 @@ function Home({
           isCardsLoading={isCardsLoading}
           cards={cards}
           onAddToCart={onAddToCart}
-          onRemove={onRemove}
           onAddToFavorite={onAddToFavorite}
           onRemoveFavorite={onRemoveFavorite}
         />
