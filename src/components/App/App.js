@@ -22,12 +22,14 @@ function App() {
   const [isOrdersLoading, setIsOrdersLoading] = useState(true);
   const [isAdded, setIsAdded] = useState(false);
 
-  const SNEAKERS_URL = 'http://localhost:3001/sneakers';
-  const CART_ITEMS_URL = 'http://localhost:3001/cartItems';
-  const FAVORITES_URL = 'http://localhost:3001/favorites';
-  const ORDERS_URL = 'http://localhost:3001/orders';
+  const SNEAKERS_URL = "http://localhost:3001/sneakers";
+  const CART_ITEMS_URL = "http://localhost:3001/cartItems";
+  const FAVORITES_URL = "http://localhost:3001/favorites";
+  const ORDERS_URL = "http://localhost:3001/orders";
 
   const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+  const cartItemsQuantity = cartItems.length;
+  const favoritesQuantity = favorites.length;
 
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
@@ -59,13 +61,14 @@ function App() {
   };
 
   const getOrders = () => {
-    axios.get(ORDERS_URL)
-    .then((res) => setOrders(res.data))
-    .catch((err) => console.log(err))
-    .finally(() => {
-      setIsOrdersLoading(false);
-    })
-  }
+    axios
+      .get(ORDERS_URL)
+      .then((res) => setOrders(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsOrdersLoading(false);
+      });
+  };
 
   useEffect(() => {
     getSneakersCards();
@@ -73,7 +76,6 @@ function App() {
     getFavorites();
     getOrders();
   }, []);
-
 
   const handleDrawerOpenClick = () => {
     setDrawerOpen(true);
@@ -87,10 +89,7 @@ function App() {
     const existingCartItem = cartItems.find((item) => item.id === sneaker.id);
     if (!existingCartItem) {
       setCartItems([...cartItems, sneaker]);
-      axios.post(
-        CART_ITEMS_URL,
-        sneaker
-      );
+      axios.post(CART_ITEMS_URL, sneaker);
     }
   };
 
@@ -105,10 +104,7 @@ function App() {
     );
     if (!existingFavoriteItem) {
       setFavorites([...favorites, sneaker]);
-      axios.post(
-        FAVORITES_URL,
-        sneaker
-      );
+      axios.post(FAVORITES_URL, sneaker);
     }
   };
 
@@ -116,10 +112,6 @@ function App() {
     axios.delete(`${FAVORITES_URL}/${id}`);
     setFavorites(favorites.filter((item) => item.id !== id));
   };
-
-  // const onSearchClick = () => {
-  //   axios.get(`${SNEAKERS_URL}/media?title_like=${searchValue}`)
-  // }
 
   return (
     <Context.Provider
@@ -135,7 +127,10 @@ function App() {
         setCards,
         setIsCardsLoading,
         onRemoveItem,
-        goBack
+        goBack,
+        cartItemsQuantity,
+        favoritesQuantity,
+        getSneakersCards,
       }}
     >
       <div className="app">
@@ -175,9 +170,14 @@ function App() {
           />
           <Route
             path="/orders"
-            element={<Orders isOrdersLoading={isOrdersLoading} onAddToCart={onAddToCart}
-            onAddToFavorite={onAddToFavorite}
-            onRemoveFavorite={onRemoveFavorite}/>}
+            element={
+              <Orders
+                isOrdersLoading={isOrdersLoading}
+                onAddToCart={onAddToCart}
+                onAddToFavorite={onAddToFavorite}
+                onRemoveFavorite={onRemoveFavorite}
+              />
+            }
             exact
           ></Route>
           <Route path="/profile" element={<Profile />} exact></Route>

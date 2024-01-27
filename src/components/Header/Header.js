@@ -4,11 +4,12 @@ import headerCart from "../../images/header-cart.svg";
 import headerFavorite from "../../images/header-favorite.svg";
 import headerProfile from "../../images/header-profile.svg";
 import { Link } from "react-router-dom";
-import { Context } from '../../context/Context'
+import { Context } from "../../context/Context";
 import { useContext } from "react";
 
 function Header({ handleDrawerOpenClick }) {
-  const { totalPrice } = useContext(Context);
+  const { cartItemsQuantity, favoritesQuantity } = useContext(Context);
+
   return (
     <header className="header">
       <Link to="/">
@@ -26,15 +27,17 @@ function Header({ handleDrawerOpenClick }) {
             className="header__cart header__nav-item"
             onClick={() => handleDrawerOpenClick()}
           >
+            <span className="cart__quantity">{cartItemsQuantity || 0}</span>
             <img
               className="header__nav-item-img"
               alt="cart-log"
               src={headerCart}
             />
-            <span>{totalPrice}р.</span>
+            <span>Корзина</span>
           </li>
           <Link to="/favorites">
             <li className="header__favourites header__nav-item">
+              <span className="cart__quantity">{favoritesQuantity || 0}</span>
               <img
                 className="header__nav-item-img"
                 alt="cart-log"
