@@ -1,11 +1,11 @@
 .order__container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .order__items-list {
-    display: flex; 
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 40px;
-    min-width: 960px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+  min-width: 960px;
 }

@@ -2,8 +2,8 @@ import "./Drawer.css";
 import CartLoader from "../loaders/CartLoader/CartLoader";
 import closeBtn from "../../images/close.svg";
 import arrow from "../../images/arrow.svg";
-import cartEmptyImg from '../../images/cart-empty.png'
-import orderCompleteImg from '../../images/order-compleate.png';
+import cartEmptyImg from "../../images/cart-empty.png";
+import orderCompleteImg from "../../images/order-compleate.png";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import axios from "axios";
@@ -16,15 +16,15 @@ function Drawer({
   isCartItemsLoading,
   onRemove,
 }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
-  const { cartItems, setCartItems, setOrders, totalPrice } = useContext(Context);
+  const { cartItems, setCartItems, setOrders, totalPrice } =
+    useContext(Context);
 
   const onClickDrawerClose = () => {
-    handleDrawerCloseClick()
+    handleDrawerCloseClick();
     setIsOrderComplete(false);
-  }
+  };
 
   const handleDeleteCardClick = (id) => {
     onRemove(id);
@@ -44,9 +44,10 @@ function Drawer({
         await delay(100);
       }
 
-      axios.get('http://localhost:3001/orders')
-      .then((res) => setOrders(res.data))
-      .catch((err) => console.log(err))
+      axios
+        .get("http://localhost:3001/orders")
+        .then((res) => setOrders(res.data))
+        .catch((err) => console.log(err));
 
       setOrderId(data.id);
       setIsOrderComplete(true);
@@ -76,23 +77,27 @@ function Drawer({
         <div className="items">
           {cartItems.length < 1 ? (
             <div className="items__empty">
-            <img className='items__empty-img' src={isOrderComplete ? orderCompleteImg : cartEmptyImg} alt='Smile'/>
-            <h3 className="items__empty-title">{isOrderComplete ? "Заказ оформлен" : "Корзина пустая"}</h3>
-            <p className="items__empty-subtitle">
-            {
-              isOrderComplete
-                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
-                : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
-            }
-            </p>
-            <button
-              className="green-button green-button_type-back"
-              onClick={onClickDrawerClose}
-            >
-              Вернуться назад
-              <img className="green-button__image" src={arrow} alt="Arrow" />
-            </button>
-          </div>
+              <img
+                className="items__empty-img"
+                src={isOrderComplete ? orderCompleteImg : cartEmptyImg}
+                alt="Smile"
+              />
+              <h3 className="items__empty-title">
+                {isOrderComplete ? "Заказ оформлен" : "Корзина пустая"}
+              </h3>
+              <p className="items__empty-subtitle">
+                {isOrderComplete
+                  ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                  : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+              </p>
+              <button
+                className="green-button green-button_type-back"
+                onClick={onClickDrawerClose}
+              >
+                Вернуться назад
+                <img className="green-button__image" src={arrow} alt="Arrow" />
+              </button>
+            </div>
           ) : isCartItemsLoading ? (
             <>
               {[...Array(3).map((item, index) => <CartLoader key={index} />)]}

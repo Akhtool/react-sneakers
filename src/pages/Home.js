@@ -5,7 +5,6 @@ function Home({
   isCardsLoading,
   cards,
   onAddToCart,
-  onRemove,
   onAddToFavorite,
   onRemoveFavorite,
 }) {

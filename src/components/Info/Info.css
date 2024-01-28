@@ -1,71 +1,67 @@
 .info__empty {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 80px;
-    margin-bottom: 80px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 .info__empty-img {
-    margin: 0 0 21px 0;
-    width: 120px;
-    height: 120px;
-    /* background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../../images/favorites_smile-img.png); */
+  margin: 0 0 21px 0;
+  width: 120px;
+  height: 120px;
 }
 .info__empty-title {
-    font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0 0 10px 0;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0 0 10px 0;
 }
 .info__empty-subtitle {
-    color: #000;
-    opacity: 0.4;
-    text-align: center;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0 0 120px 0;
+  color: #000;
+  opacity: 0.4;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 120px 0;
 }
 .green-button {
-    position: relative;
-    width: 325px;
-    height: 55px;
-    padding-left: 20px;
-    background: #9dd558;
-    border-radius: 18px;
-    border: 0;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.1s ease-in-out;
-  }
-  
-  .green-button:hover {
-    background: #abe465;
-  }
-  
-  .green-button:active {
-    background: #93c852;
-  }
-  
-  .green-button__image {
-    transform: translateX(5px);
-    position: absolute;
-    right: 30px;
-    top: 20px;
-    transition: transform 0.15s ease-in-out;
-  }
-  
-  .green-button_type-back > img {
-    transform: rotate(180deg);
-    left: 30px;
-    top: 20px;
-  }
+  position: relative;
+  width: 325px;
+  height: 55px;
+  padding-left: 20px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.green-button:hover {
+  background: #abe465;
+}
+
+.green-button:active {
+  background: #93c852;
+}
+
+.green-button__image {
+  transform: translateX(5px);
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  transition: transform 0.15s ease-in-out;
+}
+
+.green-button_type-back > img {
+  transform: rotate(180deg);
+  left: 30px;
+  top: 20px;
+}
