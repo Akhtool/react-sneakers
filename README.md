@@ -66,7 +66,7 @@ React Sneakers - это небольшой веб-сайт, созданный �
 
 1. Склонируйте репозиторий
    ```sh
-   git clone https://github.com/Freekson/React-Sneakers.git
+   git clone https://github.com/Akhtool/react-sneakers.git
    ```
 2. Зайдите в папку react-sneakers
    ```
