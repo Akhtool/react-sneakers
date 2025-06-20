@@ -9,3 +9,7 @@
   gap: 40px;
   min-width: 960px;
 }
+
+.order__payment-method {
+  margin: 0 0 10px 0;
+}

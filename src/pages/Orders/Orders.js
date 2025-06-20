@@ -37,6 +37,9 @@ function Orders({
               <div key={item.id} className="order__container">
                 <h2>Заказ №{item.id}</h2>
                 <h3>На сумму: {item.totalPrice} руб.</h3>
+                <h3 className="order__payment-method">
+                  Оплата: {item.paymentMethod}
+                </h3>
                 <div className="order__items-list">
                   {item.items.map((item) => (
                     <Card

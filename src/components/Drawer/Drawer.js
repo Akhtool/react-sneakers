@@ -18,6 +18,7 @@ function Drawer({
 }) {
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState("Наличные");
   const { cartItems, setCartItems, setOrders, totalPrice } =
     useContext(Context);
 
@@ -36,6 +37,7 @@ function Drawer({
       const { data } = await axios.post("http://localhost:3001/orders", {
         items: cartItems,
         totalPrice: totalPrice,
+        paymentMethod: paymentMethod,
       });
 
       for (let i = 0; i < cartItems.length; i++) {
@@ -144,6 +146,20 @@ function Drawer({
                 <b>{Math.round((5 / 100) * totalPrice)} руб.</b>
               </li>
             </ul>
+            <div className="cart__payment">
+              <label htmlFor="paymentMethod" className="cart__payment-label">
+                Способ оплаты:
+              </label>
+              <select
+                id="paymentMethod"
+                className="cart__payment-select"
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
+                <option value="Наличные">Наличные</option>
+                <option value="Карта">Карта</option>
+              </select>
+            </div>
             <button
               className="green-button green-button_type-send"
               onClick={onClickOrder}
